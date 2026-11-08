@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="patrīcija luiza broka – vizuālo mediju māksliniece un fotogrāfe">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>patrīcija luiza broka</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<section id="enter" class="view on" aria-label="sākumlapa">
+  <div class="stage" id="stage"><a id="enter-d" href="#creations" aria-label="enter site"><img alt="enter site"></a></div>
+  <a class="mob" id="enter-m" href="#creations" aria-label="enter site"><img alt="enter site"></a>
+</section>
+
+<div id="site" hidden>
+  <a class="name lc" href="#enter" title="sākumlapa">patrīcija luiza broka</a>
+  <header id="hdr">
+    <button class="burger" id="burger" aria-label="izvēlne" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
+    <nav class="lc" id="mainnav" aria-label="galvenā navigācija">
+      <a href="#creations" data-nav="creations">my creations</a>
+      <a href="#about" data-nav="about">about me</a>
+      <a href="#contact" data-nav="contact">contact me</a>
+    </nav>
+  </header>
+  <div class="menu lc" id="menu" hidden></div>
+  <main>
+    <section id="creations" class="view">
+      <div class="clayout">
+        <aside class="side lc" id="side" aria-label="my creations sadaļas"></aside>
+        <div><nav class="crumb lc" id="crumb" aria-label="atrašanās vieta"></nav><div class="grid" id="grid"></div></div>
+      </div>
+    </section>
+
+    <section id="work" class="view">
+      <nav class="crumb lc" id="crumb2" aria-label="atrašanās vieta"></nav>
+      <a class="back lc" id="back" href="#creations">back to my creations</a>
+      <div class="split">
+        <div class="pic"><img id="w-img" alt=""></div>
+        <div class="info">
+          <h1 id="w-title" class="lc"></h1>
+          <p class="meta"><span id="w-tech"></span><span id="w-year"></span></p>
+          <p id="w-desc"></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="view">
+      <div class="split">
+        <div class="pic"><img src="assets/img/portrait.jpg" alt="patrīcija luiza broka"></div>
+        <div class="info">
+          <div class="lab">lv</div>
+          <p>Patrīcija Luiza Broka (2001) ir vizuālo mediju māksliniece un fotogrāfe. Bakalaura grādu ieguvusi LMA Vizuālās komunikācijas specialitātē, ko šobrīd turpina maģistra līmenī, paralēli apmeklējot fotogrāfijas kursus ISSP. Māksliniece aizraujas ar tēmām un materiāliem, kas saistīti ar netveramo. Caurspīdīgumu, gaismas un krāsas mijiedarbību, telpu, slāņiem, atmiņām, tekstūru, un rozā saulrietiem. Viņas darbos bieži parādās putnu un to būru tematika, kas tiek šķetināta gadiem, galvenokārt saistībā ar feminisma tēmām. Visbiežāk izvēlas radīt, izmantojot sietspiedi, foto, projektorus, skenerus, gaismas un ādu.</p>
+          <div class="lab">eng</div>
+          <p>Patrīcija Luiza Broka (b. 2001) is a visual media artist and photographer. She holds a Bachelor's degree in Visual communication from the Art Academy of Latvia, where she is currently pursuing her Master's degree, alongside studying photography at ISSP. Her artistic practice explores topics and materials connected to the intangible. Transparency, the interaction between light and colour and space that it takes up, layers, memory, texture, and pink sunsets. Birds and their cages are a recurring motif in her work, a theme she continues to study, mainly in reference to feminist topics. Her primary media include screen printing, photography, projectors, scanning, light, and skin/leather.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="view">
+      <div class="ccenter">
+        <div class="pic"><img src="assets/img/contact.jpg" alt=""></div>
+        <div class="info contact">
+          <p class="row"><a href="mailto:patricija.broka@gmail.com">patricija.broka@gmail.com</a></p>
+          <p class="row">ig: <a href="https://instagram.com/patricijaluizabroka" target="_blank" rel="noopener">@patricijaluizabroka</a></p>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="data/scenes.js"></script>
+<script src="data/categories.js"></script>
+<script src="data/works.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
