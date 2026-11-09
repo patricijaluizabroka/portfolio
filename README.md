@@ -29,7 +29,7 @@ assets/img/         visas bildes
 - **Darbs:** atver `data/works.js`, maini `title`, `tech`, `year`, `desc`. Jaunu darbu pievieno, nokopējot bloku `{ … }` un pievienojot jaunu bildi `assets/img/`.
 - **Par mani / kontakti:** teksts ir `index.html` sadaļās `#about` un `#contact`.
 - **Krāsas un fonts:** `css/style.css`, `:root` sākumā.
-- **Fona bilde / enter poga:** aizstāj `assets/img/bg.jpg` un `assets/img/enter-btn.png`. Pogas vietu maina `#enter a` kārtulā `css/style.css`.
+- **Fona bilde / enter poga:** sākumlapas variantus (fons, poga, lapas fons) maina `data/scenes.js`; bildes ir mapē `assets/img/`. Lapas fona stiprumu katram variantam maina `op` failā `data/scenes.js`.
 
 Padoms: bildes saspied līdz ~1600 px platumā (JPG), lai lapa ielādējas ātri.
 
