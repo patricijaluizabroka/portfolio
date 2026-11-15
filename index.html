@@ -52,7 +52,7 @@
 
     <section id="about" class="view">
       <div class="split">
-        <div class="pic"><img src="assets/img/portrait.jpg" alt="patrīcija luiza broka"></div>
+        <div class="pic"><img src="assets/content/portrait.jpg" alt="patrīcija luiza broka" loading="lazy" decoding="async"></div>
         <div class="info">
           <div class="lab">lv</div>
           <p>Patrīcija Luiza Broka (2001) ir vizuālo mediju māksliniece un fotogrāfe. Bakalaura grādu ieguvusi LMA Vizuālās komunikācijas specialitātē, ko šobrīd turpina maģistra līmenī, paralēli apmeklējot fotogrāfijas kursus ISSP. Māksliniece aizraujas ar tēmām un materiāliem, kas saistīti ar netveramo. Caurspīdīgumu, gaismas un krāsas mijiedarbību, telpu, slāņiem, atmiņām, tekstūru, un rozā saulrietiem. Viņas darbos bieži parādās putnu un to būru tematika, kas tiek šķetināta gadiem, galvenokārt saistībā ar feminisma tēmām. Visbiežāk izvēlas radīt, izmantojot sietspiedi, foto, projektorus, skenerus, gaismas un ādu.</p>
@@ -64,14 +64,17 @@
 
     <section id="contact" class="view">
       <div class="ccenter">
-        <div class="pic"><img src="assets/img/contact.jpg" alt=""></div>
+        <div class="pic"><img src="assets/content/contact.jpg" alt="" loading="lazy" decoding="async"></div>
         <div class="info contact">
-          <p class="row"><a href="mailto:patricija.broka@gmail.com">patricija.broka@gmail.com</a></p>
+          <p class="row"><button type="button" class="copy" id="copy-mail" data-copy="patricija.broka@gmail.com" title="click to copy" aria-label="copy email address patricija.broka@gmail.com"><span>patricija.broka@gmail.com</span><svg class="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><svg class="i-ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button></p>
+          <p class="copied" id="copy-status" role="status" aria-live="polite"></p>
           <p class="row">ig: <a href="https://instagram.com/patricijaluizabroka" target="_blank" rel="noopener">@patricijaluizabroka</a></p>
         </div>
       </div>
     </section>
   </main>
+  <footer class="foot">© Patrīcija Luiza Broka</footer>
+  <button type="button" class="totop" id="totop" aria-label="back to top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 15l7-7 7 7" stroke-width="2.6"/></svg></button>
 </div>
 
 <script src="data/scenes.js"></script>
