@@ -89,13 +89,17 @@ function fitBg(){
  if(!d||!VW||!VH)return;
  var k=Math.max(VW/d.w,VH/d.h),w=d.w*k,h=d.h*k,x=(VW-w)/2,y=(VH-h)/2,a=(1-s.op).toFixed(3);
  var ec=edgeColors(s,d,k,y,VH),R=document.documentElement,mt=document.querySelector('meta[name=theme-color]');
- R.style.setProperty('--top',ec.top);R.style.setProperty('--bot',ec.bot);if(mt)mt.setAttribute('content',ec.top);
+ R.style.setProperty('--top',ec.top);R.style.setProperty('--bot',ec.top);if(mt)mt.setAttribute('content',ec.top);
  var wash='linear-gradient(rgba(255,255,255,'+a+'),rgba(255,255,255,'+a+'))';
+ /* apakšā fons pāriet gaišā tonī (kā augšā) - tur Safari zīmē savu gaišo rīkjoslas efektu, un tā nav asas pārejas */
+ var L=ec.top,c=parseInt(L.slice(1),16),L0='rgba('+(c>>16)+','+((c>>8)&255)+','+(c&255)+',0)';
+ function fade(u){return 'linear-gradient(to bottom,'+L0+' calc('+u+' - 190px),'+L+' calc('+u+' + 40px))'}
  [bg,$('hdr'),$('menu')].forEach(function(el){
-  el.style.backgroundImage=wash+',url("'+s.page+'")';
-  el.style.backgroundSize='100% 100%,'+w+'px '+h+'px';
-  el.style.backgroundPosition='0 0,'+x+'px '+y+'px';
+  el.style.backgroundSize='100% 100%,100% 100%,'+w+'px '+h+'px';
+  el.style.backgroundPosition='0 0,0 0,'+x+'px '+y+'px';
   el.style.backgroundRepeat='no-repeat';
+  el.style.backgroundImage=fade('100vh')+','+wash+',url("'+s.page+'")';
+  el.style.backgroundImage=fade('100svh')+','+wash+',url("'+s.page+'")';
  });
 }
 function applyPage(){
