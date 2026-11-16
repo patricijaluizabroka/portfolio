@@ -28,18 +28,31 @@ var burger=$('burger');
 function menu(open){burger.setAttribute('aria-expanded',open);$('menu').hidden=!open;document.body.classList.toggle('lock',open)}
 burger.addEventListener('click',function(){menu(burger.getAttribute('aria-expanded')!=='true')});
 addEventListener('keydown',function(e){if(e.key==='Escape')menu(false)});
-addEventListener('resize',function(){if(innerWidth>700)menu(false);pad()});
+addEventListener('resize',function(){if(innerWidth>700)menu(false);pad();layoutEnter()});
 function pad(){document.documentElement.style.setProperty('--hh',$('hdr').offsetHeight+'px');document.querySelector('main').style.paddingTop=($('hdr').offsetHeight+10)+'px'}
 var lastList='#creations';
 var sceneIdx=Math.floor(Math.random()*scenes.length),prevView=null,ent=$('enter');
 var idle=window.requestIdleCallback||function(f){setTimeout(f,1200)};
 function load(u){var i=new Image();i.src=u}
+var RATIO=4961/3508,EM=24,mq=window.matchMedia('(max-width:700px)');
+function clampTo(v,lo,hi){return Math.min(Math.max(v,lo),hi)}
+function layoutEnter(){
+ var st=$('stage'),W=ent.clientWidth,H=ent.clientHeight;
+ if(!W||mq.matches){st.style.width=st.style.height=st.style.left=st.style.top=st.style.transform='';return}
+ var s=scenes[sceneIdx],img=$('enter-d').firstChild,S=Math.max(W,H*RATIO),SH=S/RATIO;
+ var bw=s.w/100*S,bh=bw*((img.naturalHeight&&img.naturalWidth)?img.naturalHeight/img.naturalWidth:.203);
+ var cx=s.x/100*S,cy=s.y/100*SH;
+ var left=clampTo((W-S)/2,W-EM-(cx+bw/2),EM-(cx-bw/2));left=clampTo(left,W-S,0);
+ var top=clampTo((H-SH)/2,H-EM-(cy+bh/2),EM-(cy-bh/2));top=clampTo(top,H-SH,0);
+ st.style.width=S+'px';st.style.height=SH+'px';st.style.left=left+'px';st.style.top=top+'px';st.style.transform='none';
+}
 function applyEnter(){
  var s=scenes[sceneIdx],u='url('+s.bg+')';
  ent.style.backgroundImage=u;$('stage').style.backgroundImage=u;
  ent.style.setProperty('--mpos',s.mpos);ent.style.setProperty('--mtop',s.mtop);
  var d=$('enter-d');d.style.left=s.x+'%';d.style.top=s.y+'%';d.style.width=s.w+'%';
  d.firstChild.src=s.btn;$('enter-m').firstChild.src=s.btn;
+ layoutEnter();
  idle(function(){load(s.page)});
 }
 function applyPage(){
