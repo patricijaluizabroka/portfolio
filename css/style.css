@@ -1,7 +1,7 @@
-:root{--bgop:.2;--ink:#000;--paper:#fff;--soft:#f1f1f1;--accent:#FF01DD;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+:root{--bgop:.2;--ink:#000;--paper:#fff;--soft:#f1f1f1;--accent:#FF01DD;color-scheme:light;box-sizing:border-box;--tone:#fff}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 *,*::before,*::after{box-sizing:inherit}
-html{background:var(--paper)}
+html{background-color:var(--tone)}
 html,body{margin:0;min-height:100%;color:var(--ink);font-family:'Bai Jamjuree',system-ui,sans-serif;font-weight:300;line-height:1.55}
 a{color:inherit;text-decoration:none}
 a:hover,button:hover{color:var(--accent)}
@@ -12,7 +12,7 @@ a,button,img,header,.name,.side,.crumb,.menu,.card,.back,#enter,.totop{-webkit-u
 img{-webkit-user-drag:none}
 .contact a,.contact .copy{-webkit-user-select:text;user-select:text}
 
-#bgfx{position:fixed;top:0;left:0;width:100%;height:100vh;height:100lvh;z-index:-1;background:center/cover no-repeat;opacity:var(--bgop);pointer-events:none}
+#bgfx{position:fixed;top:0;left:0;width:100%;height:100vh;height:100lvh;z-index:0;background-color:var(--tone);background-repeat:no-repeat;pointer-events:none;-webkit-transform:translateZ(0);transform:translateZ(0)}
 #bgfx[hidden]{display:none}
 /* enter */
 #enter{position:fixed;inset:0;overflow:hidden;background-color:#dfe5f3;background-size:cover;background-position:50% 50%}
@@ -28,12 +28,8 @@ img{-webkit-user-drag:none}
 }
 
 /* header */
-header{position:fixed;z-index:5;top:0;left:0;right:0;height:150px;padding:0 4.2rem;align-items:center;background:transparent;display:flex;justify-content:flex-end;font-size:1.25rem;letter-spacing:.01em}
+header{position:fixed;z-index:5;top:0;left:0;right:0;height:150px;padding:0 4.2rem;align-items:center;background-color:var(--tone);background-repeat:no-repeat;display:flex;justify-content:flex-end;font-size:1.25rem;letter-spacing:.01em}
 header nav{display:flex;gap:3rem;flex-wrap:wrap}
-header.scrolled{background:#fff}
-header::before,.menu::before{content:'';position:fixed;top:0;left:0;width:100%;height:100vh;height:100lvh;z-index:-1;background:linear-gradient(rgba(255,255,255,calc(1 - var(--bgop))),rgba(255,255,255,calc(1 - var(--bgop)))),var(--pageimg) center/cover no-repeat,#fff;pointer-events:none}
-header::before{opacity:0;clip-path:inset(0 0 calc(100% - var(--hh,150px)) 0)}
-header.scrolled::before{opacity:1}
 header a[aria-current="page"]{color:var(--accent)}
 .name{position:fixed;z-index:6;top:25px;left:1.4rem;writing-mode:vertical-rl;transform:rotate(180deg);transform-origin:center;font-size:1.25rem;font-weight:400;letter-spacing:.02em;white-space:nowrap;line-height:1}
 .name,.name:hover{color:var(--accent)}
@@ -50,7 +46,7 @@ header[hidden],.menu[hidden]{display:none}
 .burger[aria-expanded="true"] span:nth-child(2){opacity:0}
 .burger[aria-expanded="true"] span:nth-child(3){top:19px;transform:rotate(-45deg)}
 .burger:hover{color:var(--accent)}
-.menu{position:fixed;z-index:4;inset:0;background:#fff;padding:calc(5rem + env(safe-area-inset-top,0px)) 1.5rem 2rem calc(3rem + 100px);overflow-y:auto}
+.menu{position:fixed;z-index:4;top:0;left:0;width:100%;height:100vh;height:100lvh;background-color:var(--tone);background-repeat:no-repeat;padding:calc(5rem + env(safe-area-inset-top,0px)) 1.5rem 2rem calc(3rem + 100px);overflow-y:auto}
 @media(max-width:360px){.menu{padding-left:calc(3rem + 60px)}}
 .menu a{display:block;font-size:1.25rem;line-height:1.3;padding:.55rem 0}
 .menu ul{list-style:none;margin:0;padding:0 0 0 1.25rem}
@@ -77,10 +73,10 @@ body.lock{overflow:hidden}
 .totop.show{opacity:1;visibility:visible;transform:none}
 .totop:hover{color:var(--accent)}
 body.lock .totop{display:none}
-#site{min-height:calc(100vh - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));display:flex;flex-direction:column}
+#site{position:relative;z-index:1;min-height:100vh;min-height:100svh;display:flex;flex-direction:column}
 #site[hidden]{display:none}
 #site main{flex:1;width:100%}
-.foot{text-align:center;font-size:.9rem;padding:1.5rem 1rem 2.5rem}
+.foot{text-align:center;font-size:.9rem;padding:1.5rem 1rem calc(2.5rem + env(safe-area-inset-bottom,0px))}
 
 /* grid */
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2.2rem 1.2rem}
