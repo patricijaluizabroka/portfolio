@@ -15,16 +15,20 @@ img{-webkit-user-drag:none}
 #bgfx{position:fixed;top:0;left:0;width:100%;height:calc(100vh + 320px);height:calc(100lvh + 320px);z-index:0;background-color:var(--tone);background-repeat:no-repeat;pointer-events:none;-webkit-transform:translateZ(0);transform:translateZ(0)}
 #bgfx[hidden]{display:none}
 /* enter */
-#enter{position:fixed;inset:0;overflow:hidden;background-color:#dfe5f3;background-size:cover;background-position:50% 50%}
-#enter .stage{position:absolute;left:50%;top:50%;width:max(100vw,calc(100vh*1.414));height:max(100vh,calc(100vw/1.414));transform:translate(-50%,-50%);background-size:100% 100%}
+#enter{position:fixed;inset:0;overflow:hidden;background-color:#5a4bb4}
+#enter .stage{position:absolute;left:50%;top:50%;width:max(100vw,calc(100vh*1.7778));height:max(100vh,calc(100vw/1.7778));transform:translate(-50%,-50%);background-size:100% 100%;background-repeat:no-repeat}
+#enter video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:1;transition:opacity .5s ease;pointer-events:none}
+#enter video.fade{opacity:0}
 #enter a{position:absolute;transform:translate(-50%,-50%);display:block}
 #enter img{width:100%;display:block;transition:filter .2s}
 #enter a:hover img,#enter a:focus-visible img{filter:brightness(.8)}
 #enter .mob{display:none}
 @media(max-width:700px){
- #enter{background-position:var(--mpos,50% 50%)}
- #enter .stage{display:none}
- #enter .mob{display:block;left:50%;top:var(--mtop,68%);width:min(72vw,340px)}
+ #enter{bottom:-160px}
+ #enter .stage{left:0;top:0;width:100%;height:100%;transform:none;background-size:cover;background-position:var(--mpos,50% 50%)}
+ #enter video{object-position:var(--mpos,50% 50%)}
+ #enter-d{display:none!important}
+ #enter .mob{display:block;left:50%;top:calc(100vh*var(--mtop,.25));top:calc(100svh*var(--mtop,.25));width:min(72vw,340px)}
 }
 
 /* header */

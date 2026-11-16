@@ -1,11 +1,10 @@
-/* Sākumlapas varianti (fons + enter poga) un tiem atbilstošais lapas fons.
-   Lapas ielādē tiek izvēlēts nejaušs variants; atgriežoties sākumlapā - nākamais.
-   x, y = pogas centrs (% no bildes), w = pogas platums (% no bildes platuma)
-   mpos = bildes fokuss telefonā, mtop = pogas augstums telefonā
-   page = fona bilde pārējām lapām, op = tās stiprums (0.2 = 20%),
-   tone = tai atbilstošā vidējā krāsa (redzama tikai ārpus bildes: pārrite, drošās zonas) */
+/* Sākumlapa: video (field) + enter poga + lapas fons.
+   video / videoM = video datoram / telefonam (telefonam vertikāls izgriezums), poster = pirmais kadrs
+   x, y = pogas centrs (% no video kadra), w = pogas platums (% no kadra platuma)
+   mpos = video fokuss telefonā, mtop = pogas augstums telefonā (daļa no ekrāna augstuma),
+   eTop/eBot = video augšas/apakšas krāsa (Safari joslām sākumlapā)
+   page = fona bilde pārējām lapām, op = tās stiprums (0.25 = 25%),
+   tone = tai atbilstošā vidējā krāsa (rezerves krāsa ārpus bildes: pārrite, drošās zonas) */
 var scenes=[
- {bg:"assets/ui/enter-01.jpg",btn:"assets/ui/btn-01.png",page:"assets/ui/bg-01.jpg",tone:"#e3d1e0",op:.2,x:61.4,y:29.3,w:26.0,mpos:"30% 50%",mtop:"78%"},
- {bg:"assets/ui/enter-02.jpg",btn:"assets/ui/btn-02.png",page:"assets/ui/bg-02.jpg",tone:"#efd3f8",op:.25,x:77.2,y:53.4,w:26.0,mpos:"40% 50%",mtop:"84%"},
- {bg:"assets/ui/enter-03.jpg",btn:"assets/ui/btn-03.png",page:"assets/ui/bg-03.jpg",tone:"#d1dae9",op:.3,x:68.8,y:40.9,w:26.0,mpos:"30% 50%",mtop:"33.3%"}
+ {video:"assets/ui/field.mp4",videoM:"assets/ui/field-m.mp4",poster:"assets/ui/field-poster.jpg",posterM:"assets/ui/field-poster-m.jpg",btn:"assets/ui/btn-02.png",page:"assets/ui/bg-03.jpg",tone:"#d9e0ed",op:.25,x:77.2,y:53.4,w:26.0,mpos:"50% 50%",mtop:.2,eTop:"#b083fa",eBot:"#6e4bc2"}
 ];
