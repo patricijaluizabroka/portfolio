@@ -30,7 +30,7 @@ burger.addEventListener('click',function(){menu(burger.getAttribute('aria-expand
 addEventListener('keydown',function(e){if(e.key==='Escape')menu(false)});
 addEventListener('resize',function(){if(innerWidth>700)menu(false);pad();layoutEnter();fitBg()});
 addEventListener('orientationchange',function(){setTimeout(function(){pad();layoutEnter();fitBg()},250)});
-function pad(){document.documentElement.style.setProperty('--hh',$('hdr').offsetHeight+'px');document.querySelector('main').style.paddingTop=($('hdr').offsetHeight+10)+'px'}
+function pad(){document.documentElement.style.setProperty('--hh',$('hdr').offsetHeight+'px');document.querySelector('main').style.paddingTop=($('hdr').offsetHeight+(innerWidth>700?0:10))+'px'}
 var lastList='#creations';
 var sceneIdx=0,prevView=null,ent=$('enter');
 var idle=window.requestIdleCallback||function(f){setTimeout(f,1200)};
