@@ -1,7 +1,11 @@
 :root{--bgop:.2;--ink:#000;--paper:#fff;--soft:#f1f1f1;--accent:#FF01DD;color-scheme:light;box-sizing:border-box;--tone:#fff;--top:#fff;--bot:#fff}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 *,*::before,*::after{box-sizing:inherit}
-html{background:var(--tone);background:linear-gradient(var(--top,var(--tone)),var(--bot,var(--tone)))no-repeat;background-color:var(--tone);min-height:100%}
+html{background:var(--top,var(--tone));background:linear-gradient(var(--top,var(--tone)),var(--bot,var(--tone)))no-repeat;background-color:var(--top,var(--tone));min-height:100%}
+/* Safari (iOS 26) tonē augšējo un apakšējo joslu pēc fiksētiem elementiem pie malas - šie sloksnīši ir ar bildes malas krāsu */
+.edge{position:fixed;left:0;right:0;height:3px;z-index:20;pointer-events:none;display:block}
+#edgeT{top:0;background:var(--top,#fff)}
+#edgeB{bottom:0;background:var(--bot,#fff)}
 html,body{margin:0;min-height:100%;color:var(--ink);font-family:'Bai Jamjuree',system-ui,sans-serif;font-weight:300;line-height:1.55}
 a{color:inherit;text-decoration:none}
 a:hover,button:hover{color:var(--accent)}
@@ -24,7 +28,6 @@ img{-webkit-user-drag:none}
 #enter a:hover img,#enter a:focus-visible img{filter:brightness(.8)}
 #enter .mob{display:none}
 @media(max-width:700px){
- #enter{bottom:-160px}
  #enter .stage{left:0;top:0;width:100%;height:100%;transform:none;background-size:cover;background-position:var(--mpos,50% 50%)}
  #enter video{object-position:var(--mpos,50% 50%)}
  #enter-d{display:none!important}
