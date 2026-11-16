@@ -138,5 +138,5 @@ body.lock .totop{display:none}
  .name{position:fixed;left:.7rem;top:calc(1.1rem + env(safe-area-inset-top,0px));font-size:1.25rem}
  main{padding-left:3rem;padding-right:1rem}
 }
-@media(min-width:701px){header{height:100px}.name{font-size:20.2px;top:46px}.side{top:var(--hh,100px)}}
+@media(min-width:701px){header{height:100px}.name{font-size:21px;top:46px}.side{top:var(--hh,100px)}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
