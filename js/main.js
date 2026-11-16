@@ -80,7 +80,7 @@ function edgeColors(s,d,k,y,VH){
    for(var i=0;i<px.length;i+=4){t[0]+=px[i];t[1]+=px[i+1];t[2]+=px[i+2];n++}
    return '#'+t.map(function(v){v=Math.round(v/n*s.op+255*(1-s.op));return('0'+v.toString(16)).slice(-2)}).join('');
   };
-  out.top=pick(-y/k);out.bot=pick((VH-160-y)/k);
+  out.top=pick(-y/k);out.bot=pick((VH-200-y)/k);
  }catch(e){}
  return out;
 }
@@ -115,6 +115,7 @@ function route(){
  if(view==='creations'){lastList=cur?'#c-'+cur:'#creations';renderGrid(cur);renderSide(cur);$('crumb').innerHTML=crumb(cur)}
  renderMenu(cur,nav);menu(false);
  prevView=view;
+ document.documentElement.classList.toggle('enter-on',view==='enter');
  if(view==='enter')playVid();else vid.pause();
  document.querySelectorAll('.view').forEach(function(v){v.classList.toggle('on',v.id===view)});
  $('site').hidden=(view==='enter');$('bgfx').hidden=(view==='enter');fitBg();
