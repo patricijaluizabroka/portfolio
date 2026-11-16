@@ -57,10 +57,31 @@ function applyEnter(){
  idle(function(){load(s.page)});
 }
 var dims={};
+var edge={};
+function edgeColors(s,d,k,y,VH){
+ /* vidējā krāsa redzamās bildes augšējā/apakšējā malā, sajaukta ar balto pēc stipruma op;
+    ar to tiek aizpildītas zonas ārpus fona slāņa (Safari bāri, drošās zonas) */
+ var out={top:s.tone,bot:s.tone};
+ try{
+  var im=edge[s.page];
+  if(!im||!im.complete)return out;
+  var cw=48,ch=Math.max(8,Math.round(48*d.h/d.w)),c=document.createElement('canvas');c.width=cw;c.height=ch;
+  var g=c.getContext('2d');g.drawImage(im,0,0,cw,ch);
+  var pick=function(y0){
+   var r=Math.min(ch-1,Math.max(0,Math.round(y0/d.h*ch))),r2=Math.min(ch-1,r+2),r1=Math.max(0,r-1),px=g.getImageData(0,r1,cw,r2-r1+1).data,t=[0,0,0],n=0;
+   for(var i=0;i<px.length;i+=4){t[0]+=px[i];t[1]+=px[i+1];t[2]+=px[i+2];n++}
+   return '#'+t.map(function(v){v=Math.round(v/n*s.op+255*(1-s.op));return('0'+v.toString(16)).slice(-2)}).join('');
+  };
+  out.top=pick(-y/k);out.bot=pick((VH-160-y)/k);
+ }catch(e){}
+ return out;
+}
 function fitBg(){
  var s=scenes[sceneIdx],bg=$('bgfx'),d=dims[s.page],VW=document.documentElement.clientWidth,VH=bg.clientHeight;
  if(!d||!VW||!VH)return;
  var k=Math.max(VW/d.w,VH/d.h),w=d.w*k,h=d.h*k,x=(VW-w)/2,y=(VH-h)/2,a=(1-s.op).toFixed(3);
+ var ec=edgeColors(s,d,k,y,VH),R=document.documentElement,mt=document.querySelector('meta[name=theme-color]');
+ R.style.setProperty('--top',ec.top);R.style.setProperty('--bot',ec.bot);if(mt)mt.setAttribute('content',ec.top);
  var wash='linear-gradient(rgba(255,255,255,'+a+'),rgba(255,255,255,'+a+'))';
  [bg,$('hdr'),$('menu')].forEach(function(el){
   el.style.backgroundImage=wash+',url("'+s.page+'")';
@@ -71,9 +92,9 @@ function fitBg(){
 }
 function applyPage(){
  var s=scenes[sceneIdx],r=document.documentElement,mt=document.querySelector('meta[name=theme-color]');
- r.style.setProperty('--tone',s.tone);if(mt)mt.setAttribute('content',s.tone);
- if(dims[s.page])fitBg();
- else{var im=new Image();im.onload=function(){dims[s.page]={w:im.naturalWidth,h:im.naturalHeight};fitBg()};im.src=s.page}
+ r.style.setProperty('--tone',s.tone);r.style.setProperty('--top',s.tone);r.style.setProperty('--bot',s.tone);if(mt)mt.setAttribute('content',s.tone);
+ if(dims[s.page]&&edge[s.page])fitBg();
+ else{var im=new Image();im.onload=function(){edge[s.page]=im;dims[s.page]={w:im.naturalWidth,h:im.naturalHeight};fitBg()};im.src=s.page}
  idle(function(){load(scenes[(sceneIdx+1)%scenes.length].bg)});
 }
 function route(){
