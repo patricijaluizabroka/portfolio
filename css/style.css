@@ -109,7 +109,7 @@ body.lock .totop{display:none}
 .lab{color:var(--accent);font-weight:500;font-size:.85rem;margin:1.6rem 0 .3rem}
 .lab:first-child{margin-top:0}
 .back{display:inline-flex;align-items:center;gap:.15rem;margin-bottom:2rem;font-size:1.25rem}
-.back svg{width:1.15em;height:1.15em;flex:none;margin-left:-.4em}
+.back svg{width:1.05em;height:1.05em;flex:none;margin-left:-.35em;transform:translateY(.05em)}
 .back:hover{color:var(--accent)}
 @media(min-width:701px){.back{font-size:1rem}}
 .contact a{border-bottom:1px solid currentColor}
@@ -143,6 +143,7 @@ body.lock .totop{display:none}
  .clayout{display:block;margin-left:0}
  .burger{display:block}
  .crumb{display:block}
+ #work .crumb,#work .back{font-size:1rem}
  .name{position:fixed;left:.7rem;top:calc(1.1rem + env(safe-area-inset-top,0px));font-size:1.25rem}
  main{padding-left:3rem;padding-right:1rem}
 }
