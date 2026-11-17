@@ -122,6 +122,11 @@ body.lock .totop{display:none}
 #about .pic{background:none}
 #about .split{grid-template-columns:4fr 6fr}
 #about .pic img{width:100%}
+/* desktop: bilde nepārsniedz pieejamo augstumu (ekrāns - header 100px - 36px gaisa; 626 px ekrānā = 490 px), teksts pietuvināts bildei */
+@media(min-width:901px){
+ #about .split{grid-template-columns:fit-content(calc((100% - 3.5rem)*.4)) 1fr}
+ #about .pic img{width:auto;height:auto;max-width:100%;max-height:max(320px,calc(100vh - 136px));max-height:max(320px,calc(100svh - 136px))}
+}
 .ccenter{display:flex;flex-direction:column;align-items:center;text-align:center;gap:calc(1.8rem + 20px)}
 .ccenter .pic{width:min(27vw,390px)}
 .ccenter .info{max-width:none}
