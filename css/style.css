@@ -16,7 +16,7 @@ a,button,img,header,.name,.side,.crumb,.menu,.card,.back,#enter,.totop{-webkit-u
 img{-webkit-user-drag:none}
 .contact a,.contact .copy{-webkit-user-select:text;user-select:text}
 
-#bgfx{position:sticky;top:0;left:0;width:100%;height:calc(100vh + 200px);height:calc(100lvh + 200px);margin-bottom:calc(-100vh - 200px);margin-bottom:calc(-100lvh - 200px);z-index:0;background-color:var(--bot,var(--tone));background-repeat:no-repeat;pointer-events:none}
+#bgfx{position:sticky;top:0;left:0;width:100%;height:calc(100vh + 130px);height:calc(100lvh + 130px);margin-bottom:calc(-100vh - 130px);margin-bottom:calc(-100lvh - 130px);z-index:0;background-color:var(--bot,var(--tone));background-repeat:no-repeat;pointer-events:none}
 #bgfx[hidden]{display:none}
 /* enter */
 #enter{position:fixed;inset:0;overflow:hidden;background-color:var(--top,#5a4bb4);z-index:1}
@@ -139,4 +139,14 @@ body.lock .totop{display:none}
  main{padding-left:3rem;padding-right:1rem}
 }
 @media(min-width:701px){header{height:100px}.name{font-size:21px;top:44px}.side{top:var(--hh,100px)}}
+/* contact me, desktop: viss ietilpst vienā ekrānā (arī 1280x626) - bilde pielāgojas pieejamajam augstumam */
+@media(min-width:701px){
+ #bgfx{height:100vh;height:100lvh;margin-bottom:-100vh;margin-bottom:-100lvh}
+ main:has(#contact.on){padding-bottom:0}
+ #site:has(#contact.on) .foot{padding-top:1rem;padding-bottom:1.5rem}
+ #contact .ccenter{gap:clamp(14px,3.2svh,28px)}
+ #contact .ccenter .pic{width:min(27vw,390px,calc((100vh - var(--creserve,292px))*.9134));width:min(27vw,390px,calc((100svh - var(--creserve,292px))*.9134))}
+ #contact .contact .row{margin-bottom:.35rem}
+ #contact .copied{min-height:1.2rem;margin-bottom:-10px}
+}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
