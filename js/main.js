@@ -121,6 +121,7 @@ function galGo(i){
 /* ierāmējuma augstums = rādītās bildes augstums, lai vadība vienmēr atrodas tādā pašā attālumā zem bildes kā "back" saite virs tās */
 function galFit(){
  var im=$('gstage').children[G.i],st=$('gstage');if(!im)return;
+ if(!st.clientWidth)return;
  if(!im.naturalWidth){im.onload=galFit;return}
  var gh=parseFloat(getComputedStyle(st).maxHeight)||st.clientHeight,h=Math.min(gh,st.clientWidth*im.naturalHeight/im.naturalWidth);
  st.style.setProperty('--h',Math.round(h)+'px');
@@ -162,6 +163,7 @@ function route(){
  document.documentElement.classList.toggle('enter-on',view==='enter');
  if(view==='enter')playVid();else vid.pause();
  document.querySelectorAll('.view').forEach(function(v){v.classList.toggle('on',v.id===view)});
+ if(G.n&&view==='work')galFit();
  $('site').hidden=(view==='enter');$('bgfx').hidden=(view==='enter');fitBg();
  document.querySelectorAll('[data-nav]').forEach(function(a){a.toggleAttribute('aria-current',a.dataset.nav===nav);if(a.dataset.nav===nav)a.setAttribute('aria-current','page')});
  pad();scrollTo({top:0,left:0,behavior:'instant'});
