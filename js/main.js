@@ -5,7 +5,7 @@ function parentOf(id){for(var i=0;i<cats.length;i++){var c=cats[i];if(c.id===id)
 function renderGrid(id){
  var out=works.map(function(w,i){return {w:w,i:i}}).filter(function(o){return !id||o.w.cat===id||(o.w.cat||'').indexOf(id+'-')===0});
  $('grid').innerHTML=out.length?out.map(function(o){
-  return '<a class="card" href="#work-'+(o.i+1)+'"><div class="ph"><img src="'+o.w.img+'" alt="'+o.w.title+'" loading="lazy" decoding="async"></div><div class="t lc">'+o.w.title+'</div><div class="y">'+o.w.year+'</div></a>';
+  return '<a class="card" href="#work-'+(o.i+1)+'"><div class="ph"><img src="'+(o.w.thumb||o.w.img)+'" alt="'+o.w.title+'" loading="lazy" decoding="async"></div><div class="t lc">'+o.w.title+'</div><div class="y">'+o.w.year+'</div></a>';
  }).join(''):'<p class="empty">šajā sadaļā vēl nav darbu</p>';
 }
 function links(list,cur){return list.map(function(c){return '<a href="#c-'+c.id+'"'+(c.id===cur?' class="on"':'')+'>'+c.label+'</a>'}).join('')}
@@ -149,11 +149,14 @@ document.addEventListener('keydown',function(e){
  st.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;
   if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy)*1.4){G.t=Date.now();galGo(G.i+(dx<0?1:-1))}},{passive:true});
 })();
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+/* apraksts: rindkopas atdala tukša rinda; rindkopa "lv"/"eng" = rozā virsraksts */
+function descHtml(t){return String(t||'').split(/\n\s*\n/).map(function(p){p=p.trim();return /^(lv|eng)$/i.test(p)?'<div class="lab">'+p.toLowerCase()+'</div>':'<p>'+esc(p)+'</p>'}).join('')}
 function route(){
  var h=(location.hash||'#enter').slice(1),m=/^work-(\d+)$/.exec(h),view=h,nav=h,cur=null;
  if(/^c-/.test(h)){cur=h.slice(2);if(catOf(cur)){view=nav='creations'}else{cur=null;view=nav='creations';h='creations'}}
  if(m){var w=works[m[1]-1];if(!w){view=nav='creations'}else{view='work';nav='creations';$('back').href=lastList;$('crumb2').innerHTML=crumb(w.cat,w.title);
-  $('w-img').loading='lazy';$('w-img').decoding='async';$('w-img').src=w.img;$('w-img').alt=w.title;$('w-title').textContent=w.title;$('w-tech').textContent=w.tech;$('w-year').textContent=w.year;$('w-desc').textContent=w.desc;galInit(w)}}
+  $('w-img').loading='lazy';$('w-img').decoding='async';$('w-img').src=w.img;$('w-img').alt=w.title;$('w-title').textContent=w.title;$('w-tech').textContent=w.tech;$('w-year').textContent=w.year;$('w-desc').innerHTML=descHtml(w.desc);galInit(w)}}
  if(['enter','creations','about','contact','work'].indexOf(view)<0)view=nav='creations';
  if(view==='enter'&&prevView!==null&&prevView!=='enter')sceneIdx=(sceneIdx+1)%scenes.length;
  if(view==='enter')applyEnter();else applyPage();
