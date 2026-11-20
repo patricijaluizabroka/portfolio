@@ -91,6 +91,7 @@ body.lock .totop{display:none}
 
 /* grid */
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2.2rem 1.2rem}
+.grid.g2{grid-template-columns:repeat(2,1fr)}
 .card{display:block;text-align:left}
 .card .ph{aspect-ratio:3/3.6;background:var(--soft);overflow:hidden}
 .card img{width:100%;height:100%;object-fit:cover;display:block}
@@ -127,15 +128,17 @@ body.lock .totop{display:none}
 #about .pic img{width:100%}
 /* desktop: bilde nepārsniedz pieejamo augstumu (ekrāns - header 100px - 36px gaisa; 626 px ekrānā = 490 px), teksts pietuvināts bildei */
 @media(min-width:901px){
- #about .split{grid-template-columns:fit-content(calc((100% - 3.5rem)*.4)) 1fr}
- #about .pic img{width:auto;height:auto;max-width:100%;max-height:max(320px,calc(100vh - 136px));max-height:max(320px,calc(100svh - 136px))}
+ #about .split{display:flex;justify-content:center;align-items:center;gap:3.5rem;min-height:calc(80vh - 200px);min-height:calc(80svh - 200px)}
+ #about .info{flex:none;width:min(48vw,620px)}
+ #about .pic{flex:none}
+ #about .pic img{display:block;width:auto;height:auto;max-width:none}
 }
 .ccenter{display:flex;flex-direction:column;align-items:center;text-align:center;gap:calc(1.8rem + 20px)}
 .ccenter .pic{width:min(27vw,390px)}
 .ccenter .info{max-width:none}
 .ccenter img{width:100%;display:block}
 
-@media(max-width:900px){#about .split{grid-template-columns:1fr}#about .pic img{width:80%}.ccenter .pic{width:min(60%,360px)}.clayout{grid-template-columns:8rem 1fr;gap:1.2rem;margin-left:0}.grid{grid-template-columns:repeat(2,1fr);gap:1.8rem .9rem}.split{grid-template-columns:minmax(0,1fr);gap:1.6rem}}
+@media(max-width:900px){#about .split{grid-template-columns:1fr}#about .pic img{width:60%}.ccenter .pic{width:min(60%,360px)}.clayout{grid-template-columns:8rem 1fr;gap:1.2rem;margin-left:0}.grid{grid-template-columns:repeat(2,1fr);gap:1.8rem .9rem}.split{grid-template-columns:minmax(0,1fr);gap:1.6rem}}
 @media(max-width:700px){
  header{height:auto;padding:calc(10px + env(safe-area-inset-top,0px)) 13px 6px 1rem;border-bottom:0}
  #mainnav{display:none!important}
@@ -200,3 +203,12 @@ body.lock .totop{display:none}
 .lb-l{left:.3rem}.lb-r{right:.3rem}
 @media(max-width:700px){.lb-stage{inset:52px 0 24px}.lb-arrow{display:none}}
 .lb-on{overflow:hidden}
+
+.lb-stage img{cursor:pointer}
+/* contact me */
+.dare{color:var(--accent);font-size:1.25rem;margin:0 0 1.1rem}
+@media(min-width:901px){
+ #contact .ccenter{padding-top:0;margin-top:0;min-height:calc(80vh - 200px);min-height:calc(80svh - 200px);flex-direction:row;align-items:center;justify-content:center;gap:clamp(48px,7vw,100px);text-align:left}
+ #contact .ccenter .info{order:1;padding-top:0}
+ #contact .ccenter .pic{order:2;width:min(20.8vw,300px)}
+}
