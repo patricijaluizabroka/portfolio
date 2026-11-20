@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=20261120b">
+<link rel="stylesheet" href="css/style.css?v=20261120i">
 </head>
 <body>
 <i class="edge" id="edgeT" aria-hidden="true"></i><i class="edge" id="edgeB" aria-hidden="true"></i>
@@ -49,9 +49,8 @@
             <div class="gstage" id="gstage" tabindex="0" role="group" aria-roledescription="carousel" aria-label="darba bildes"></div>
             <div class="gctl" role="group" aria-label="bilžu navigācija">
               <button type="button" class="garrow" id="gprev" aria-label="iepriekšējā bilde"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7" stroke-width="1.5"/></svg></button>
-              <div class="gdots" id="gdots"></div>
-              <button type="button" class="garrow" id="gnext" aria-label="nākamā bilde"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke-width="1.5"/></svg></button>
               <span class="gcount" id="gcount" aria-live="polite"></span>
+                            <button type="button" class="garrow" id="gnext" aria-label="nākamā bilde"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke-width="1.5"/></svg></button>
             </div>
           </div></div>
         <div class="info">
@@ -89,9 +88,18 @@
   <button type="button" class="totop" id="totop" aria-label="back to top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 15l7-7 7 7" stroke-width="2.6"/></svg></button>
 </div>
 
-<script src="data/scenes.js?v=20261120b"></script>
-<script src="data/categories.js?v=20261120b"></script>
-<script src="data/works.js?v=20261120b"></script>
-<script src="js/main.js?v=20261120b"></script>
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="galerija" hidden>
+  <div class="lb-top"><span class="lb-count" id="lb-count" aria-live="polite"></span>
+   <button type="button" id="lb-full" aria-label="pilnekrāna režīms"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" stroke-width="1.8"/></svg></button>
+   <button type="button" id="lb-share" aria-label="kopīgot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12l-7-7v4C7 10 4 14 3 19c2.500-3.500 6-5 10-5v4z" fill="currentColor" stroke="none"/></svg></button>
+   <button type="button" id="lb-close" aria-label="aizvērt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19" stroke-width="2.2"/></svg></button></div>
+  <div class="lb-stage" id="lb-stage"><img id="lb-img" alt="" draggable="false"></div>
+  <button type="button" class="lb-arrow lb-l" id="lb-prev" aria-label="iepriekšējā bilde"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7" stroke-width="1.5"/></svg></button>
+  <button type="button" class="lb-arrow lb-r" id="lb-next" aria-label="nākamā bilde"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke-width="1.5"/></svg></button>
+ </div>
+<script src="data/scenes.js?v=20261120i"></script>
+<script src="data/categories.js?v=20261120i"></script>
+<script src="data/works.js?v=20261120i"></script>
+<script src="js/main.js?v=20261120i"></script>
 </body>
 </html>

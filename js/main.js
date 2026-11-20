@@ -111,10 +111,10 @@ function applyPage(){
 /* darba galerija: bultiņas, svītriņu indikatori, skaitītājs, taustiņi un vilkšana (swipe) */
 var G={i:0,n:0,t:0};
 function galGo(i){
- var imgs=$('gstage').children,d=$('gdots').children;if(!G.n)return;
+ var imgs=$('gstage').children;if(!G.n)return;
  G.i=(i+G.n)%G.n;
- for(var k=0;k<G.n;k++){imgs[k].classList.toggle('on',k===G.i);d[k].setAttribute('aria-current',k===G.i)}
- $('gcount').textContent=('0'+(G.i+1)).slice(-2)+' / '+('0'+G.n).slice(-2);
+ for(var k=0;k<G.n;k++){imgs[k].classList.toggle('on',k===G.i)}
+ $('gcount').textContent=('0'+(G.i+1)).slice(-2)+' / '+('0'+G.n).slice(-2);if(LB.on)lbShow();
  var nx=new Image();nx.src=imgs[(G.i+1)%G.n].src;
  galFit();
 }
@@ -127,6 +127,7 @@ function galFit(){
  st.style.setProperty('--h',Math.round(h)+'px');
 }
 addEventListener('resize',function(){if(G.n)galFit()});
+addEventListener('load',function(){if(G.n)galFit()});
 function vidInit(w){
  var box=$('vbox'),on=!!(w&&w.vimeo);
  $('work').classList.toggle('vmode',on);
@@ -140,21 +141,44 @@ function galInit(w){
  if(!list){G.n=0;return}
  G.n=list.length;
  $('gstage').innerHTML=list.map(function(s,i){return '<img src="'+s+'" alt="'+w.title+' ('+(i+1)+'/'+list.length+')" decoding="async">'}).join('');
- $('gdots').innerHTML=list.map(function(s,i){return '<button type="button" aria-label="bilde '+(i+1)+'"></button>'}).join('');
- [].forEach.call($('gdots').children,function(b,i){b.onclick=function(){galGo(i)}});
+ [].forEach.call($('gstage').children,function(im,k){im.addEventListener('load',function(){if(k===G.i)galFit()})});
  galGo(0);
 }
+$('w-img').onclick=function(){lbOpen(0)};
 $('gprev').onclick=function(){galGo(G.i-1)};
 $('gnext').onclick=function(){galGo(G.i+1)};
-$('gstage').onclick=function(){if(Date.now()-G.t<350)return;galGo(G.i+1)};
+$('gstage').onclick=function(){if(Date.now()-G.t<350)return;lbOpen(G.i)};
 document.addEventListener('keydown',function(e){
- if(!G.n||!$('work').classList.contains('on')||e.altKey||e.ctrlKey||e.metaKey)return;
+ if(LB.on||!G.n||!$('work').classList.contains('on')||e.altKey||e.ctrlKey||e.metaKey)return;
  if(e.key==='ArrowLeft'){galGo(G.i-1);e.preventDefault()}else if(e.key==='ArrowRight'){galGo(G.i+1);e.preventDefault()}
 });
 (function(){var sx=0,sy=0,st=$('gstage');
  st.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;sy=e.touches[0].clientY},{passive:true});
  st.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;
   if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy)*1.4){G.t=Date.now();galGo(G.i+(dx<0?1:-1))}},{passive:true});
+})();
+/* pilnekrāna galerija (lightbox) */
+var LB={on:false,list:[],i:0,t:''};
+function lbShow(){var im=$('lb-img');im.src=LB.list[LB.i];im.alt=LB.t;$('lb-count').textContent=LB.list.length>1?(LB.i+1)+' / '+LB.list.length:'';
+ var m=LB.list.length<2;$('lb-prev').hidden=m;$('lb-next').hidden=m;if(LB.list.length>1){var n=new Image();n.src=LB.list[(LB.i+1)%LB.list.length]}}
+function lbGo(d){LB.i=(LB.i+d+LB.list.length)%LB.list.length;if(G.n)G.i=LB.i;lbShow()}
+function lbOpen(i){var w=works[(/^#work-(\d+)$/.exec(location.hash)||[0,1])[1]-1]||{};
+ LB.list=w.imgs&&w.imgs.length>1?w.imgs:[w.img];LB.i=i||0;LB.t=w.title||'';LB.on=true;
+ $('lb').hidden=false;document.documentElement.classList.add('lb-on');lbShow();$('lb-close').focus({preventScroll:true})}
+function lbClose(){if(!LB.on)return;LB.on=false;$('lb').hidden=true;document.documentElement.classList.remove('lb-on');
+ if(document.fullscreenElement&&document.exitFullscreen)document.exitFullscreen();if(G.n){galGo(LB.i)}}
+$('lb-close').onclick=lbClose;$('lb-prev').onclick=function(){lbGo(-1)};$('lb-next').onclick=function(){lbGo(1)};
+$('lb-stage').onclick=function(e){if(e.target===this)lbClose()};
+$('lb-full').onclick=function(){var el=$('lb');if(document.fullscreenElement){document.exitFullscreen()}else if(el.requestFullscreen){el.requestFullscreen().catch(function(){})}};
+if(!document.documentElement.requestFullscreen)$('lb-full').hidden=true;
+$('lb-share').onclick=function(){var u=location.href;if(navigator.share){navigator.share({title:LB.t,url:u}).catch(function(){})}else if(navigator.clipboard){navigator.clipboard.writeText(u).catch(function(){})}};
+document.addEventListener('keydown',function(e){if(!LB.on)return;
+ if(e.key==='Escape')lbClose();else if(e.key==='ArrowLeft'){lbGo(-1);e.preventDefault()}else if(e.key==='ArrowRight'){lbGo(1);e.preventDefault()}});
+addEventListener('hashchange',lbClose);
+(function(){var sx=0,sy=0,st=$('lb-stage');
+ st.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;sy=e.touches[0].clientY},{passive:true});
+ st.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;
+  if(LB.list.length>1&&Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy)*1.4)lbGo(dx<0?1:-1)},{passive:true});
 })();
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
 /* apraksts: rindkopas atdala tukša rinda; rindkopa "lv"/"eng" = rozā virsraksts */
