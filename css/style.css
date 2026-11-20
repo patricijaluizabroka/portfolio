@@ -150,7 +150,9 @@ body.lock .totop{display:none}
  #work .back,#work .crumb b,#work .crumb i:nth-last-child(2){display:none}
  .name{position:fixed;left:1rem;top:calc(30px + env(safe-area-inset-top,0px));writing-mode:horizontal-tb;transform:translateY(-50%);font-size:1.25rem;font-weight:300;letter-spacing:.01em}
  main{padding-left:1rem;padding-right:1rem}
- .menu{padding-left:1rem}
+ .menu{padding-left:1rem;padding-right:1rem;text-align:center}
+ .menu ul{padding-left:0}
+ #about .pic img{aspect-ratio:1/1.15;object-fit:cover;object-position:50% 0;margin:0 auto}
 }
 @media(min-width:701px){header{height:100px}.name{font-size:21px;top:44px}.side{top:var(--hh,100px)}}
 /* contact me, desktop: viss ietilpst vienā ekrānā (arī 1280x626) - bilde pielāgojas pieejamajam augstumam */
