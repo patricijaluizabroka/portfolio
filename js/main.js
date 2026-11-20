@@ -5,7 +5,7 @@ function parentOf(id){for(var i=0;i<cats.length;i++){var c=cats[i];if(c.id===id)
 function renderGrid(id){
  var out=works.map(function(w,i){return {w:w,i:i}}).filter(function(o){return !id||o.w.cat===id||(o.w.cat||'').indexOf(id+'-')===0});
  $('grid').innerHTML=out.length?out.map(function(o){
-  return '<a class="card" href="#work-'+(o.i+1)+'"><div class="ph"><img src="'+(o.w.thumb||o.w.img)+'" alt="'+o.w.title+'" loading="lazy" decoding="async"></div><div class="t lc">'+o.w.title+'</div><div class="y">'+o.w.year+'</div></a>';
+  return '<a class="card" href="#work-'+(o.i+1)+'"><div class="ph"'+(o.w.ratio?' style="aspect-ratio:'+o.w.ratio+'"':'')+'><img src="'+(o.w.thumb||o.w.img)+'" alt="'+o.w.title+'" loading="lazy" decoding="async"></div><div class="t lc">'+o.w.title+'</div><div class="y">'+o.w.year+'</div></a>';
  }).join(''):'<p class="empty">šajā sadaļā vēl nav darbu</p>';
 }
 function links(list,cur){return list.map(function(c){return '<a href="#c-'+c.id+'"'+(c.id===cur?' class="on"':'')+'>'+c.label+'</a>'}).join('')}
@@ -127,6 +127,13 @@ function galFit(){
  st.style.setProperty('--h',Math.round(h)+'px');
 }
 addEventListener('resize',function(){if(G.n)galFit()});
+function vidInit(w){
+ var box=$('vbox'),on=!!(w&&w.vimeo);
+ $('work').classList.toggle('vmode',on);
+ if(!on){box.innerHTML='';return}
+ box.style.aspectRatio=w.ratio||'16/9';
+ box.innerHTML='<iframe title="'+esc(w.title)+'" src="https://player.vimeo.com/video/'+w.vimeo+(w.vh?'?h='+w.vh:'')+'" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" allowfullscreen></iframe>';
+}
 function galInit(w){
  var list=w.imgs&&w.imgs.length>1?w.imgs:null,single=$('w-img');
  $('gal').hidden=!list;single.hidden=!!list;
@@ -156,7 +163,8 @@ function route(){
  var h=(location.hash||'#enter').slice(1),m=/^work-(\d+)$/.exec(h),view=h,nav=h,cur=null;
  if(/^c-/.test(h)){cur=h.slice(2);if(catOf(cur)){view=nav='creations'}else{cur=null;view=nav='creations';h='creations'}}
  if(m){var w=works[m[1]-1];if(!w){view=nav='creations'}else{view='work';nav='creations';$('back').href=lastList;$('crumb2').innerHTML=crumb(w.cat,w.title);
-  $('w-img').loading='lazy';$('w-img').decoding='async';$('w-img').src=w.img;$('w-img').alt=w.title;$('w-title').textContent=w.title;$('w-tech').textContent=w.tech;$('w-year').textContent=w.year;$('w-desc').innerHTML=descHtml(w.desc);galInit(w)}}
+  $('w-img').loading='lazy';$('w-img').decoding='async';$('w-img').src=w.img;$('w-img').alt=w.title;$('w-title').textContent=w.title;$('w-tech').textContent=w.tech;$('w-year').textContent=w.year;$('w-desc').innerHTML=descHtml(w.desc||'');galInit(w);vidInit(w)}}
+ if(!m||view!=='work')vidInit(null);
  if(['enter','creations','about','contact','work'].indexOf(view)<0)view=nav='creations';
  if(view==='enter'&&prevView!==null&&prevView!=='enter')sceneIdx=(sceneIdx+1)%scenes.length;
  if(view==='enter')applyEnter();else applyPage();

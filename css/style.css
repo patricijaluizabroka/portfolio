@@ -179,3 +179,11 @@ body.lock .totop{display:none}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
 #wpic{background:none}
 #w-img[hidden]{display:none}
+
+/* video darbs: atskaņotājs pilnā platumā, nosaukums un gads zem */
+.vbox{display:none;width:100%;background:#000}
+.vbox iframe{width:100%;height:100%;display:block;border:0}
+#work.vmode .vbox{display:block;margin-bottom:1.2rem}
+#work.vmode .pic,#work.vmode .meta #w-tech,#work.vmode #w-desc{display:none}
+#work.vmode .split{grid-template-columns:minmax(0,1fr);gap:0}
+#work.vmode .info h1{font-size:1.1rem;margin:0 0 .15rem}
